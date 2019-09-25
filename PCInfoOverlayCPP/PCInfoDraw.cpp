@@ -4,8 +4,6 @@
 
 PCInfoDraw::PCInfoDraw()
 {
-	this->hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, L"Verdana");
-	hTmp = (HFONT)SelectObject(this->parentHandle, hFont);
 	rect.left = 40;
 	rect.top = 10;
 }
@@ -14,6 +12,7 @@ void PCInfoDraw::DrawStencil() {
 	if (this->ReadyToDraw) {
 		for (int i = 0; i < this->_stext.GetTextCount(); i++) {
 			TextItem *textObj = this->_stext.GetTextItem(i);
+			hTmp = (HFONT)SelectObject(this->parentHandle, textObj->fontItem);
 			DrawText(this->parentHandle, textObj->ItemContent->c_str(), -1, &rect, DT_SINGLELINE | DT_NOCLIP);
 		}
 	}
@@ -34,8 +33,8 @@ void PCInfoDraw::Unregister() {
 }
 PCInfoDraw::~PCInfoDraw()
 {
-	DeleteObject(SelectObject(parentHandle, this->hTmp));
-	::UpdateWindow(0);
+	//DeleteObject(SelectObject(parentHandle, this->hTmp));
+	//::UpdateWindow(0);
 	::ReleaseDC(0, this->parentHandle);
 	::UpdateWindow(0);
 }
