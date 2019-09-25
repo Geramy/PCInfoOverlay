@@ -23,7 +23,7 @@
     <ProjectGuid>{4940637E-7151-4687-B017-A1035E7AB68B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PCInfoOverlayCPP</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

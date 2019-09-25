@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PCInfoDraw.h"
 
-
+//This class draws the object on the screen from the array of screens aka TextItem which is stored inside ScreenText
 PCInfoDraw::PCInfoDraw()
 {
 	rect.left = 40;
