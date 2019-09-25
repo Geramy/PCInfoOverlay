@@ -8,12 +8,9 @@ PCInfoDraw::PCInfoDraw()
 
 void PCInfoDraw::DrawStencil() {
 	this->ReadyToDraw = true;
-	int i = 0;
-	
-	
-	while (true) {
-		DrawText(this->parentHandle, text, -1, &rect, DT_SINGLELINE | DT_NOCLIP);
-		Sleep(1);
+	for (int i = 0; i < this->_stext.GetTextCount(); i++) {
+		TextItem *textObj = this->_stext.GetTextItem(i);
+		DrawText(this->parentHandle, textObj->ItemContent->c_str(), -1, &rect, DT_SINGLELINE | DT_NOCLIP);
 	}
 }
 

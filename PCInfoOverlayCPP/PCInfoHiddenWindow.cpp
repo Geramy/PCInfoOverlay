@@ -18,7 +18,7 @@ void PCInfoHiddenWindow::background_processor(PCInfoHiddenWindow *parent) {
 	bool screenLocked = false;
 	bool lockedRegistered = false;
 	bool backgroundRegistered = true;
-	drawBackgroundObject->RegisterStencil(hdc);
+	drawBackgroundObject->RegisterStencil(hdc, parent->_displayText);
 	int runs = 0;
 	int total_runs = (int)floor(1000 / 16);
 	while (true) {
@@ -29,16 +29,16 @@ void PCInfoHiddenWindow::background_processor(PCInfoHiddenWindow *parent) {
 		if (screenLocked) {
 			if (!lockedRegistered) {
 				lockedRegistered = true;
-				drawLockObject->RegisterStencil(hdcss);
+				drawLockObject->RegisterStencil(hdcss, parent->_displayText);
 			}
-			drawLockObject->DrawStencil(parent->_displayText);
+			drawLockObject->DrawStencil();
 		}
 		else {
 			if (lockedRegistered) {
 				drawLockObject->Unregister();
 				lockedRegistered = false;
 			}
-			drawBackgroundObject->DrawStencil(parent->_displayText);
+			drawBackgroundObject->DrawStencil();
 		}
 		if (runs++ >= total_runs) {
 			runs = 0;
@@ -48,6 +48,10 @@ void PCInfoHiddenWindow::background_processor(PCInfoHiddenWindow *parent) {
 			break;
 		Sleep(16);
 	}
+}
+
+void PCInfoHiddenWindow::Wait() {
+	this->background_thread->join();
 }
 
 BOOL PCInfoHiddenWindow::PCInfoHiddenWindow::Create()

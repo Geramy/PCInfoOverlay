@@ -14,6 +14,7 @@ public:
 	PCInfoHiddenWindow(ScreenText);
 	static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM w_param, LPARAM l_param);
 	BOOL Create();
+	void Wait();
 	void HandleMessage(HWND hwnd, UINT msg, WPARAM w_param, LPARAM l_param);
 	~PCInfoHiddenWindow();
 private:

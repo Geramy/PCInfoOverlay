@@ -2,8 +2,8 @@
 class TextItem
 {
 public:
-	TextItem();
-	std::string *ItemContent;
+	TextItem(wchar_t *);
+	std::wstring *ItemContent;
 	UINT *FontSize;
 	~TextItem();
 };

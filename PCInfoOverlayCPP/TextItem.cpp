@@ -2,8 +2,9 @@
 #include "TextItem.h"
 
 
-TextItem::TextItem()
+TextItem::TextItem(wchar_t* text)
 {
+	this->ItemContent = new std::wstring(text);
 }
 
 
