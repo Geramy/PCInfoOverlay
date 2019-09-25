@@ -7,7 +7,6 @@ std::map<HWND, PCInfoHiddenWindow*> PCInfoHiddenWindow::message_handles;
 PCInfoHiddenWindow::PCInfoHiddenWindow(ScreenText text_data)
 {
 	this->_displayText = text_data;
-	this->background_thread = new std::thread([=] { this->background_processor(this); });
 }
 
 void PCInfoHiddenWindow::background_processor(PCInfoHiddenWindow *parent) {
@@ -38,7 +37,8 @@ void PCInfoHiddenWindow::background_processor(PCInfoHiddenWindow *parent) {
 				drawLockObject->Unregister();
 				lockedRegistered = false;
 			}
-			drawBackgroundObject->DrawStencil();
+			if(backgroundRegistered)
+				drawBackgroundObject->DrawStencil();
 		}
 		if (runs++ >= total_runs) {
 			runs = 0;
@@ -56,6 +56,7 @@ void PCInfoHiddenWindow::Wait() {
 
 BOOL PCInfoHiddenWindow::PCInfoHiddenWindow::Create()
 {
+	this->background_thread = new std::thread([=] { this->background_processor(this); });
 	return TRUE;
 }
 
