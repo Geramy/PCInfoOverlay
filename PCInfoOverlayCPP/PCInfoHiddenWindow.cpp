@@ -116,7 +116,7 @@ HWND PCInfoHiddenWindow::FindDTWindow(LPCWSTR className, LPCWSTR WindowName)
 {
 	HWND hWnd = ::FindWindow(className, WindowName);
 
-	DWORD dResult = 0;
+	PDWORD_PTR dResult = 0;
 
 	SendMessageTimeout(hWnd,
 		0x052C,
@@ -124,7 +124,7 @@ HWND PCInfoHiddenWindow::FindDTWindow(LPCWSTR className, LPCWSTR WindowName)
 		NULL,
 		SMTO_NORMAL,
 		1000,
-		&dResult);
+		dResult);
 
 	HWND hwndWorkW = NULL;
 	do
