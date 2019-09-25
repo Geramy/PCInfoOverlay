@@ -4,6 +4,10 @@
 
 PCInfoDraw::PCInfoDraw()
 {
+	this->hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, L"Verdana");
+	hTmp = (HFONT)SelectObject(this->parentHandle, hFont);
+	rect.left = 40;
+	rect.top = 10;
 }
 
 void PCInfoDraw::DrawStencil() {
@@ -22,20 +26,16 @@ void PCInfoDraw::RegisterStencil(HDC dcHandle, ScreenText text) {
 	SetTextColor(this->parentHandle, RGB(250, 250, 250));
 	SetBkMode(this->parentHandle, TRANSPARENT);
 	SetBkColor(this->parentHandle, RGB(0, 0, 0));
-	this->hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, L"Verdana");
-	auto hTmp = (HFONT)SelectObject(this->parentHandle, hFont);
-	rect.left = 40;
-	rect.top = 10;
 	::UpdateWindow(0);
 }
 
 void PCInfoDraw::Unregister() {
 	this->ReadyToDraw = false;
+}
+PCInfoDraw::~PCInfoDraw()
+{
 	DeleteObject(SelectObject(parentHandle, this->hTmp));
 	::UpdateWindow(0);
 	::ReleaseDC(0, this->parentHandle);
 	::UpdateWindow(0);
-}
-PCInfoDraw::~PCInfoDraw()
-{
 }
